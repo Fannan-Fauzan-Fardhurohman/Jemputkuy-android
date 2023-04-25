@@ -1,4 +1,4 @@
-package id.fannan.cloningojekonlineandroiddriver
+package id.fannan.core
 
 import org.junit.Test
 

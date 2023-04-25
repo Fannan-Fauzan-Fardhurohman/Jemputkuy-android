@@ -1,5 +1,4 @@
 android {
-    namespace 'id.fannan.cloningojekonlineandroid'
     compileSdk 33
 
     buildTypes {

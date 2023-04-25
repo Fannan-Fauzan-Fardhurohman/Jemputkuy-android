@@ -1,4 +1,4 @@
-package id.fannan.cloningojekonlineandroiddriver
+package id.fannan.ojekudriver
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

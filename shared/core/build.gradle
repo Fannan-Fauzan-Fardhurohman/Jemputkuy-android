@@ -1,24 +1,18 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
 apply from: "$rootDir/gradle/script/main.gradle"
-apply from: "$rootDir/gradle/script/main.localmodule.gradle"
 apply from: "$rootDir/gradle/script/main.dependencies.gradle"
-
+apply from: "$rootDir/gradle/script/main.localmodule.gradle"
 android {
     defaultConfig {
-        applicationId "id.fannan.cloningojekonlineandroid"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 }
 
-dependencies {
-    implementation project(":shared:core")
-}
