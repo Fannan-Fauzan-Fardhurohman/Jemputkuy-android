@@ -12,13 +12,20 @@ import id.fannan.core.extensions.findIdByLazy
 class TransportCardView(context: Context, attributeSet: AttributeSet) :
     FrameLayout(context, attributeSet) {
 
+    enum class Type {
+        BIKE,
+        CAR,
+        TAXI
+    }
+
     private val componentView: View by findIdByLazy(R.id.transport_card_root)
     private val imageView: ImageView by findIdByLazy(R.id.transport_card_img)
     private val titleView: TextView by findIdByLazy(R.id.transport_card_title)
 
     private var _imageRes: Int = -1
     private var _title: String = ""
-    private var _isSelected: Boolean = false
+    private var _isTransportSelected: Boolean = false
+    private var _type: Type = Type.BIKE
     var imageRes: Int
         get() = _imageRes
         set(value) {
@@ -27,8 +34,20 @@ class TransportCardView(context: Context, attributeSet: AttributeSet) :
 
     var title: String
         get() = _title
-        set(value){
+        set(value) {
             titleView.text = value
+        }
+
+    var isTransportSelected: Boolean
+        get() = _isTransportSelected
+        set(value) {
+            setBackgroundRoot(value)
+        }
+
+    var type: Type
+        get() = _type
+        set(value) {
+            setComponentType(value)
         }
 
     init {
@@ -37,12 +56,45 @@ class TransportCardView(context: Context, attributeSet: AttributeSet) :
             .apply {
                 val image = getResourceId(R.styleable.TransportCardView_image, -1)
                 val title = getString(R.styleable.TransportCardView_title).orEmpty()
-                val isSelected = getBoolean(R.styleable.TransportCardView_isSelected, isSelected)
+                val isSelected = getBoolean(R.styleable.TransportCardView_isSelected, false)
+                val typeIndex = getInt(R.styleable.TransportCardView_transportType, _type.ordinal)
+                val type = Type.values()[typeIndex]
+
                 _title = title
                 setImageView(image)
                 setBackgroundRoot(isSelected)
                 titleView.text = title
+                setComponentType(type)
             }.recycle()
+    }
+
+    private fun setComponentType(type: Type) {
+        _type = type
+        val (imgRes, title) = when (type) {
+            Type.BIKE -> {
+                Pair(
+                    R.drawable.ic_transport_bike,
+                    "TransBike"
+                )
+            }
+
+            Type.TAXI -> {
+                Pair(
+                    R.drawable.ic_transport_taxi,
+                    "TransTaxi"
+                )
+            }
+
+            else -> {
+                Pair(
+                    R.drawable.ic_transport_car,
+                    "TransCar"
+                )
+            }
+        }
+        this.imageRes = imgRes
+        this.title = title
+
     }
 
     private fun setImageView(imageRes: Int) {
@@ -54,7 +106,7 @@ class TransportCardView(context: Context, attributeSet: AttributeSet) :
     }
 
     private fun setBackgroundRoot(isSelected: Boolean) {
-        this.isSelected = isSelected
+        _isTransportSelected = isSelected
         val backgroundRoot = if (isSelected) {
             R.drawable.bg_transport_card_stroke
         } else {
@@ -66,6 +118,8 @@ class TransportCardView(context: Context, attributeSet: AttributeSet) :
     }
 
     override fun isSelected(): Boolean {
-        return super.isSelected()
+        val selected = super.isSelected()
+        setBackgroundRoot(selected)
+        return selected
     }
 }

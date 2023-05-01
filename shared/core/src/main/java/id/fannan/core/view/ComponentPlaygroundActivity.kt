@@ -23,7 +23,6 @@ class ComponentPlaygroundActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_component_playground)
-        transportBike.imageRes = R.drawable.ic_transport_car
-        transportBike.title = "Anuan Mas"
+        transportBike.type = TransportCardView.Type.TAXI
     }
 }
