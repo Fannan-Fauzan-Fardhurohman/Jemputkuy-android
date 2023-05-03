@@ -4,6 +4,8 @@
     package="id.fannan.cloningojekonlineandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
         android:name=".MainCustomer"
         android:allowBackup="true"
@@ -14,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CloningOjekOnlineAndroid"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD6RIFuCGrEF6kyck9BTvJMwKS5NyBtxFk" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

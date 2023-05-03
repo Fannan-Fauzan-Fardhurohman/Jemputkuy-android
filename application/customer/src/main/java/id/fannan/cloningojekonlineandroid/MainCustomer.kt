@@ -6,6 +6,10 @@ import id.fannan.core.KoinStarter
 class MainCustomer : Application() {
     override fun onCreate() {
         super.onCreate()
-        KoinStarter.onCreate(this)
+        KoinStarter.onCreate(
+            this, listOf(
+                HomeModule.module()
+            )
+        )
     }
 }
